@@ -11,6 +11,7 @@ public class Parser {
     TK f_var_decl[] = {TK.VAR, TK.none};
     TK f_const_decl[] = {TK.CONST, TK.none};
     TK f_statement[] = {TK.ID, TK.PRINT, TK.IF, TK.WHILE, TK.FOR, TK.none};
+    TK f_increment[] = {TK.INCREMENT, TK.none};
     TK f_print[] = {TK.PRINT, TK.none};
     TK f_assignment[] = {TK.ID, TK.none};
     TK f_if[] = {TK.IF, TK.none};
@@ -131,6 +132,8 @@ public class Parser {
     private void statement(){
         if( first(f_assignment) )
             assignment();
+        else if( first(f_increment) )
+            increment();
         else if( first(f_print) )
             print();
         else if( first(f_if) )
@@ -157,10 +160,16 @@ public class Parser {
         gcprint(";");
     }
 
+    private void increment(){
+        mustbe(TK.INCREMENT);
+        gcprint("++");
+
+        scan();
+    }
+
     private void print(){
         mustbe(TK.PRINT);
         gcprint("printf(\"%d\", ");
-//        print_expression_list();
         expression();
         gcprint(");");
 
@@ -171,15 +180,6 @@ public class Parser {
           gcprint(");");
         }
         gcprint("printf(\"\\n\");");
-    }
-
-    private void print_expression_list(){
-        expression();
-        while( is(TK.COMMA) ){
-            gcprint(tok.string);
-            scan();
-            expression();
-        }
     }
 
     private void ifproc(){

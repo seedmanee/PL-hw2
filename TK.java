@@ -16,6 +16,7 @@ public class TK {
     }
 
     // each token has a TK object.
+    public static final TK INCREMENT = new TK("TK.INCREMENT");  // increment
 
     public static final TK VAR     = new TK("TK.VAR");     // var
     public static final TK CONST   = new TK("TK.CONST");   // const

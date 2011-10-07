@@ -248,6 +248,7 @@ public class Scan {
         //(not best way to handle this, but expedient.)
         if (str.equals("var"))       return TK.VAR;
         if (str.equals("const"))     return TK.CONST;
+        if (str.equals("increment")) return TK.INCREMENT;
         if (str.equals("print"))     return TK.PRINT;
         if (str.equals("if"))        return TK.IF;
         if (str.equals("then"))      return TK.THEN;
